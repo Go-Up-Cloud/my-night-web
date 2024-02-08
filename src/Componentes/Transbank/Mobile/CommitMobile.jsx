@@ -20,7 +20,7 @@ export default function CommitMobile () {
     
     useEffect(() => {
       dispatch(commitMobile(params))
-    }, []);
+    }, [dispatch]);
               
     return (
       <>
