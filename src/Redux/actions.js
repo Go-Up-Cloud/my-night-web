@@ -84,7 +84,7 @@ export function commit(payload) {
 }
 export function commitMobile(payload) {
   return async function (dispatch) {
-    var result = await axios.post( 'http://192.168.100.48:3000/transbank/commit' , payload);
+    var result = await axios.post( 'http://192.168.0.122:3000/transbank/commit' , payload);
     return dispatch({
       type: COMMIT,
       payload: result.data,
