@@ -17,7 +17,7 @@ export default function Transbank() {
           return;
         }
 
-        const response = await axios.post("http://localhost:3000/transbank/create", {
+        const response = await axios.post("/transbank/create", {
           total: evento.price,
           buy_order: 1234,
         });

@@ -60,7 +60,6 @@ export function loginUsuario(payload) {
 
 // Transbank
 
-const remot = "http://localhost:3000/transbank/";
 
 export function buyProducts(payload) {
   return async function (dispatch) {
@@ -94,7 +93,7 @@ export function commitMobile(payload) {
 
 export function status(payload) {
   return async function (dispatch) {
-    var result = await axios.post( `${remot + "status"} `, payload );
+    var result = await axios.post( "transbank/status", payload );
     return dispatch({
       type: STATUS,
       payload: result.data,
