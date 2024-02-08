@@ -17,6 +17,8 @@ export default function CommitMobile () {
     acc[key] = value;
     return acc;
   }, {});
+
+  console.log(params);
     
     useEffect(() => {
       dispatch(commitMobile(params))

@@ -64,7 +64,7 @@ const remot = "http://localhost:3000/transbank/";
 
 export function buyProducts(payload) {
   return async function (dispatch) {
-    const result = await axios.post(`${remot + "create"} `, payload);
+    const result = await axios.post("transbank/create", payload);
     return dispatch({
       type: BUY_PRODUCT,
       payload: result.data,
@@ -74,7 +74,7 @@ export function buyProducts(payload) {
 
 export function commit(payload) {
   return async function (dispatch) {
-    var result = await axios.post( `${remot + "commit"} ` , payload);
+    var result = await axios.post( "transbank/commit" , payload);
     console.log(result.data.message);
     return dispatch({
       type: COMMIT,
@@ -84,7 +84,7 @@ export function commit(payload) {
 }
 export function commitMobile(payload) {
   return async function (dispatch) {
-    var result = await axios.post( 'http://192.168.0.122:3000/transbank/commit' , payload);
+    var result = await axios.post( '/transbank/commit' , payload);
     return dispatch({
       type: COMMIT,
       payload: result.data,
