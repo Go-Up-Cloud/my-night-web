@@ -18,11 +18,13 @@ export default function CommitMobile () {
     return acc;
   }, {});
 
-  console.log(params);
+  console.log("antes del useefect", response_code);
     
     useEffect(() => {
       dispatch(commitMobile(params))
-    }, [dispatch]);
+    }, []);
+
+  console.log("despues del useefect", response_code);
               
     return (
       <>
@@ -32,9 +34,9 @@ export default function CommitMobile () {
         response_code === 0 ? (
           <Success />
         ) : response_code === false ? (
-          <Failed />
-        ) : (
           <Loader />
+        ) : (
+          <Failed />
         )}
       </>
     );

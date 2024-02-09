@@ -31,9 +31,9 @@ export default function Commit() {
       response_code === 0 ? (
         <Success />
       ) : response_code === false ? (
-        <Failed />
-      ) : (
         <Loader />
+      ) : (
+        <Failed />
       )}
     </>
   );
