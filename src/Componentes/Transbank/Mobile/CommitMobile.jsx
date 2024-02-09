@@ -10,6 +10,7 @@ export default function CommitMobile () {
   const dispatch = useDispatch();
   const response_code = useSelector((state) => state.response_code);
   const message = useSelector((state) => state.message);
+  const buy_order = useSelector((state) => state.buy_order);
   const urlParams = new URLSearchParams(window.location.search);
 
   // Recoge todos los parámetros de la URL y los convierte a un objeto
@@ -29,14 +30,14 @@ export default function CommitMobile () {
     return (
       <>
         {message? (
-        <Canceled message={message}/> 
+        <Canceled message={message} order={buy_order}/> 
         ) :
         response_code === 0 ? (
-          <Success />
+          <Success order={buy_order} />
         ) : response_code === false ? (
-          <Loader />
+          <Loader order={buy_order}/>
         ) : (
-          <Failed />
+          <Failed order={buy_order}/>
         )}
       </>
     );

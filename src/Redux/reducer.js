@@ -10,6 +10,7 @@ const initialState = {
   payment_type_code: "",
   commerce_code: undefined,
   order: "O-" + Math.floor(Math.random() * 10000) + 1,
+  buy_order: "",
   commerce_code: 597055555536,
   allProducts: [],
   products: [],
@@ -54,6 +55,7 @@ function rootReducer(state = initialState, action) {
       const newState = {
         ...state,
         message: action.payload.message?action.payload.message:state.message,
+        buy_order: action.payload.buy_order?action.payload.buy_order:state.buy_order,
         installments_number: action.payload.details?[0].installments_number:state.installments_number,
         response_code: action.payload.details?action.payload.details[0].response_code:state.response_code,
         card_detail: action.payload.card_detail?action.payload.card_detail?.card_number:state.card_detail ,
