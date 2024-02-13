@@ -5,7 +5,7 @@ import Loader from "../Loader/Loader";
 import Success from "./Status/Success";
 import Failed from "./Status/Failed";
 import Canceled from "./Status/Canceled";
-import { commit } from "../../redux/actions";
+import { commitWeb } from "../../redux/actions";
 
 export default function Commit() {
   const dispatch = useDispatch();
@@ -20,22 +20,37 @@ export default function Commit() {
     return acc;
   }, {});
 
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
-    dispatch(commit(params));
-  }, [dispatch]);
+    const fetchData = async () => {
+      try {
+        await dispatch(commitWeb(params));
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  if (loading) {
+    return <Loader order={buy_order} />;
+  }
 
   return (
     <>
-      {message? (
-      <Canceled message={message} order={buy_order}/> 
-      ) :
-      response_code === 0 ? (
+      {message ? (
+        <Canceled message={message} order={buy_order} />
+      ) : response_code === 0 ? (
         <Success order={buy_order} />
-      ) : response_code === false ? (
-        <Loader />
       ) : (
-        <Failed order={buy_order}/>
+        <Failed order={buy_order} />
       )}
     </>
   );
 }
+
+

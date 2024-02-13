@@ -19,29 +19,36 @@ export default function CommitMobile () {
     return acc;
   }, {});
 
-  console.log("antes del useefect", response_code);
-    
-    useEffect(() => {
-      dispatch(commitMobile(params))
-    }, []);
+  const [loading, setLoading] = useState(true);
 
-  console.log("despues del useefect", response_code);
-              
-    return (
-      <>
-        {message? (
-        <Canceled message={message} order={buy_order}/> 
-        ) :
-        response_code === 0 ? (
-          <Success order={buy_order} />
-        ) : response_code === false ? (
-          <Loader order={buy_order}/>
-        ) : (
-          <Failed order={buy_order}/>
-        )}
-      </>
-    );
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        await dispatch(commitMobile(params));
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  if (loading) {
+    return <Loader order={buy_order} />;
   }
 
-
+  return (
+    <>
+      {message ? (
+        <Canceled message={message} order={buy_order} />
+      ) : response_code === 0 ? (
+        <Success order={buy_order} />
+      ) : (
+        <Failed order={buy_order} />
+      )}
+    </>
+  );
+}
 

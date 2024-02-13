@@ -71,9 +71,9 @@ export function buyProducts(payload) {
   };
 }
 
-export function commit(payload) {
+export function commitWeb(payload) {
   return async function (dispatch) {
-    var result = await axios.post( "transbank/commit" , payload);
+    var result = await axios.post( "transbank/commit-web" , payload);
     console.log(result.data);
     return dispatch({
       type: COMMIT,
